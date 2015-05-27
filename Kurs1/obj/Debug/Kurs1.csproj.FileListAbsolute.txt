@@ -1,1 +1,6 @@
 c:\users\sam\documents\visual studio 2013\Projects\Kurs1\Kurs1\bin\Debug\Kurs1.exe.config
+c:\users\sam\documents\visual studio 2013\Projects\Kurs1\Kurs1\bin\Debug\Kurs1.exe
+c:\users\sam\documents\visual studio 2013\Projects\Kurs1\Kurs1\bin\Debug\Kurs1.pdb
+c:\users\sam\documents\visual studio 2013\Projects\Kurs1\Kurs1\obj\Debug\Kurs1.csprojResolveAssemblyReference.cache
+c:\users\sam\documents\visual studio 2013\Projects\Kurs1\Kurs1\obj\Debug\Kurs1.exe
+c:\users\sam\documents\visual studio 2013\Projects\Kurs1\Kurs1\obj\Debug\Kurs1.pdb
