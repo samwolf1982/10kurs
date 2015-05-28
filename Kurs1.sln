@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "k1", "k1\k1.vcxproj", "{8A941938-0F26-489B-A43C-1CA0A2F7FD99}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "K2", "K2\K2.vcxproj", "{72D817C1-B5FF-4C9B-A081-155C69530255}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TempConsole", "TempConsole\TempConsole.vcxproj", "{10CF3058-5272-4806-AE70-8FCC0B5BBA4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +19,14 @@ Global
 		{8A941938-0F26-489B-A43C-1CA0A2F7FD99}.Debug|Win32.Build.0 = Debug|Win32
 		{8A941938-0F26-489B-A43C-1CA0A2F7FD99}.Release|Win32.ActiveCfg = Release|Win32
 		{8A941938-0F26-489B-A43C-1CA0A2F7FD99}.Release|Win32.Build.0 = Release|Win32
+		{72D817C1-B5FF-4C9B-A081-155C69530255}.Debug|Win32.ActiveCfg = Debug|Win32
+		{72D817C1-B5FF-4C9B-A081-155C69530255}.Debug|Win32.Build.0 = Debug|Win32
+		{72D817C1-B5FF-4C9B-A081-155C69530255}.Release|Win32.ActiveCfg = Release|Win32
+		{72D817C1-B5FF-4C9B-A081-155C69530255}.Release|Win32.Build.0 = Release|Win32
+		{10CF3058-5272-4806-AE70-8FCC0B5BBA4C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{10CF3058-5272-4806-AE70-8FCC0B5BBA4C}.Debug|Win32.Build.0 = Debug|Win32
+		{10CF3058-5272-4806-AE70-8FCC0B5BBA4C}.Release|Win32.ActiveCfg = Release|Win32
+		{10CF3058-5272-4806-AE70-8FCC0B5BBA4C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
