@@ -11,6 +11,7 @@
 #include <fstream>
 #include <windows.h>
 using namespace std;
+// cтруктура имитирующая 7 битный код
 struct BITS7 {
 	unsigned b0 : 1;
 	unsigned b1 : 1;
@@ -20,6 +21,7 @@ struct BITS7 {
 	unsigned b5 : 1;
 	unsigned b6 : 1;
 };
+// cтруктура имитирующая 8 битный код
 struct BITS {
 	unsigned b0 : 1;
 	unsigned b1 : 1;
@@ -30,9 +32,9 @@ struct BITS {
 	unsigned b6 : 1;
 	unsigned b7 : 1;
 };
-void state(char c);
+
 void openfile();
-void code();
+void code(char * pathtofile);
 void decode();
 long filesize(char * path);
 void createfile(string path);
@@ -44,35 +46,36 @@ void createfile(string path);
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	
+	// локаль
 	setlocale(LC_ALL, "Rus");
 
 
 	cout << "Size:" << filesize("file.txt") << "\n";
 	// create file buff
 	    createfile("buff.txt");
-	code();
+	// кодируеться из 8 битной в 7 битную
+		code("file.txt");
+		// декодируеться из 8 битной в 7 битную
 	decode();
-	system("pause");
+
 
 	return 0;
 }
 
-void code(){
-	char * path = "file.txt";
-
+void code(char * pathtofile){
+	char * path = pathtofile;
+	char * bufer = "buff.txt";
 	long siz = filesize(path);
 	long fullsize = siz / 7;
 	long lastbite = siz % 7;
-	bool readyread = false;
 
 	//char ch;
 	BITS arrBit8[7];
 	BITS7 arrBit7[8];
 
-	cout << "s=" << siz / 8 << "   last:" << lastbite << "\n";
+//	cout << "s=" << siz / 8 << "   last:" << lastbite << "\n";
 
-	int counter = 1;
+	//int counter = 1;
 
 #pragma region Fuul loops
 
@@ -84,14 +87,14 @@ void code(){
 		size_t j = 0;
 		
 
-		FILE * fpBufer = fopen("buff.txt", "wb");// создание и очистка буфера
+		FILE * fpBufer = fopen(bufer, "wb");// создание и очистка буфера
 		fclose(fpBufer);
-		
+		// побайтовое чтение файла до конца
 			while (fread(&arrBit8[j++], 1, 1, fp) != 0)
 			{
 
 
-
+				// если набрали 7 тогда идем в середину
 				if (j>6){
 					j = 0;
 #pragma region write to buff
@@ -99,6 +102,7 @@ void code(){
 					//  testr resd 7*8
 					/*for (size_t ia = 0; ia < fullsize; ia++)
 					{*/
+					// show
 						for (size_t ja = 0; ja < 7; ja++)
 						{
 							cout << arrBit8[ja].b0 << arrBit8[ja].b1 << arrBit8[ja].b2 << arrBit8[ja].b3 << arrBit8[ja].b4 << arrBit8[ja].b5 << arrBit8[ja].b6 << arrBit8[ja].b7 << "\n";
@@ -115,7 +119,7 @@ void code(){
 							arrBit7[j].b4 = arrBit8[j].b4;
 							arrBit7[j].b5 = arrBit8[j].b5;
 							arrBit7[j].b6 = arrBit8[j].b6;
-							//	cout << arrBit7[j].b0 << arrBit7[j].b1 << arrBit7[j].b2 << arrBit7[j].b3 << arrBit7[j].b4 << arrBit7[j].b5 << arrBit7[j].b6  << "\n";
+							
 						}
 
 						arrBit7[7].b0 = arrBit8[0].b7;
@@ -125,7 +129,9 @@ void code(){
 						arrBit7[7].b4 = arrBit8[4].b7;
 						arrBit7[7].b5 = arrBit8[5].b7;
 						arrBit7[7].b6 = arrBit8[6].b7;
+
 						cout << "------------------после конвертации 8 - 7 ------------------------\n";
+						// show
 						for (size_t j5 = 0; j5 < 8; j5++)
 						{
 							cout << arrBit7[j5].b0 << arrBit7[j5].b1 << arrBit7[j5].b2 << arrBit7[j5].b3 << arrBit7[j5].b4 << arrBit7[j5].b5 << arrBit7[j5].b6 << "\n";
@@ -133,10 +139,8 @@ void code(){
 
 						cout << "Запись в файл buffer" << "\n";
 
-						FILE * fpBufer = fopen("buff.txt", "ab");
+						FILE * fpBufer = fopen(bufer, "ab");
 						
-						if (fpBufer == NULL){ ofstream outfile("buff.txt"); outfile.close(); fpBufer = fopen("buff.txt", "ab"); }
-						//fseek(fpBufer, 0, SEEK_END);
 						for (size_t j3 = 0; j3 < 8; j3++)
 						{
 							fwrite(&arrBit7[j3], 1, 1, fpBufer);
@@ -180,9 +184,9 @@ void code(){
 
 
 #pragma region LatsBytes
-
+			         //      те байты что осталисб (не кратные 7)
 			if (j > 0){
-				                    // ok
+				                // тоже что и выше конвертация
 				for (size_t i = 0; i < j-1; i++)
 				{
 					// конвертация
@@ -195,7 +199,7 @@ void code(){
 						arrBit7[i].b4 = arrBit8[i].b4;
 						arrBit7[i].b5 = arrBit8[i].b5;
 						arrBit7[i].b6 = arrBit8[i].b6;
-						//	cout << arrBit7[j].b0 << arrBit7[j].b1 << arrBit7[j].b2 << arrBit7[j].b3 << arrBit7[j].b4 << arrBit7[j].b5 << arrBit7[j].b6  << "\n";
+						
 					
 				}
 
@@ -208,17 +212,15 @@ void code(){
 				arrBit7[j-1].b4 = arrBit8[4].b7;
 				arrBit7[j-1].b5 = arrBit8[5].b7;
 				arrBit7[j-1].b6 = arrBit8[6].b7;
-                FILE * fpBufer = fopen("buff.txt", "ab");
-				//if (fpBufer == NULL){ ofstream outfile("buff.txt"); outfile.close(); fpBufer = fopen("buff.txt", "ab"); }
-				// write to buff
-				for (size_t i = 0; i < j-1; i++)
-				{
-					for (size_t j3 = 0; j3 < j; j3++)
+				// дозапись 
+                FILE * fpBufer = fopen(bufer, "ab");
+	
+				for (size_t j3 = 0; j3 < j; j3++)
 					{
 						fwrite(&arrBit7[j3], 1, 1, fpBufer);
 					}
 					fclose(fpBufer);
-				}
+				
 
 			}
 
@@ -249,23 +251,12 @@ void code(){
 
 
 #pragma endregion
-			 //       write is ok
+			 //       write is ok  лог
 			cout << "Запись успешная прочитано"<< filesize(path) <<"b.  записано "<< filesize("buff.txt") <<" b. \n";
 
 
 #pragma region Read loop
-
-
-			while (fread(&arrBit8[j++], 1, 1, fp) != 0)
-			{
-
-
-
-			}
 #pragma endregion
-
-
-
 }
 
 
@@ -273,11 +264,11 @@ void code(){
 void decode(){
 	createfile("result.txt");
 	char * path = "buff.txt";
+	char * pathResult = "result.txt";
 
 	long siz = filesize(path);
 	long fullsize = siz / 7;
 	long lastbite = siz % 7;
-	bool readyread = false;
 
 	//char ch;
 	BITS arrBit8[7];
@@ -309,7 +300,7 @@ void decode(){
 	cout << "Считывание из буфера\n";
 	FILE * fpBufer;
 	size_t j = 0;
-	fpBufer = fopen("buff.txt", "rb");
+	fpBufer = fopen(path, "rb");
 
 // read 8*n and convert to 7*n
 	while (fread(&arrBit7[j++], 1, 1, fpBufer) != 0)
@@ -326,7 +317,7 @@ void decode(){
 				arrBit8[jw].b4 = arrBit7[jw].b4;
 				arrBit8[jw].b5 = arrBit7[jw].b5;
 				arrBit8[jw].b6 = arrBit7[jw].b6;
-				//cout << arrBit8[j].b0 << arrBit8[j].b1 << arrBit8[j].b2 << arrBit8[j].b3 << arrBit8[j].b4 << arrBit8[j].b5 << arrBit7[j].b6 << "\n";
+		
 			}
 
 
@@ -340,16 +331,13 @@ void decode(){
 			// read to new file like result
 			
 			cout << "-DECODE-----------------после конвертации  7 - 8 ------------------------\n";
-
+			// show
 			for (size_t j = 0; j < 7; j++)
 			{
 				cout << arrBit8[j].b0 << arrBit8[j].b1 << arrBit8[j].b2 << arrBit8[j].b3 << arrBit8[j].b4 << arrBit8[j].b5 << arrBit8[j].b6 << arrBit8[j].b7 << "\n";
 			}
 			cout << "Запись в файл result" << "\n";
-			FILE * fp = fopen("result.txt", "ab");
-
-		//	if (fp == NULL){ ofstream outfile("result.txt"); outfile.close(); fp = fopen("result.txt", "ab"); }
-			//fseek(fpBufer, 0, SEEK_END);
+			FILE * fp = fopen(pathResult, "ab");
 			for (size_t j3 = 0; j3 < 7; j3++)
 			{
 				fwrite(&arrBit8[j3], 1, 1, fp);
@@ -415,16 +403,9 @@ void decode(){
 		arrBit8[4].b7 = arrBit7[j - 1].b4;
 		arrBit8[5].b7 = arrBit7[j - 1].b5;
 		arrBit8[6].b7 = arrBit7[j - 1].b6;
-		//arrBit8[j - 1].b0 = arrBit8[0].b7;
-		//arrBit8[j - 1].b1 = arrBit8[1].b7;
-		//arrBit8[j - 1].b2 = arrBit8[2].b7;
-		//arrBit8[j - 1].b3 = arrBit8[3].b7;
-		//arrBit8[j - 1].b4 = arrBit8[4].b7;
-		//arrBit8[j - 1].b5 = arrBit8[5].b7;
-		//arrBit7[j - 1].b6 = arrBit8[6].b7;
+
 		FILE * fpB = fopen("result.txt", "ab");
-		//if (fpBufer == NULL){ ofstream outfile("buff.txt"); outfile.close(); fpBufer = fopen("buff.txt", "ab"); }
-		// write to res file
+
 		for (size_t i = 0; i < j ; i++)
 		{
 			for (size_t j3 = 0; j3 < j; j3++)
@@ -440,34 +421,11 @@ void decode(){
 
 
 
-	//cout << "------------------после конвертации 7 - 8 ------------------------\n";
-
-	//for (size_t j = 0; j < 7; j++)
-	//{
-	//	cout << arrBit8[j].b0 << arrBit8[j].b1 << arrBit8[j].b2 << arrBit8[j].b3 << arrBit8[j].b4 << arrBit8[j].b5 << arrBit8[j].b6 << arrBit8[j].b7 << "\n";
-	//}
-
-
-
 
 	cout << "------------------------------------------\n";
 
 #pragma endregion
 
-#pragma region LastLoops
-	//FILE * fp = fopen(path, "rb");
-	//size_t j = 0;
-	//do{
-
-	//	if (fread(&arrBit8[j], 1, 1, fp) == 0){
-	//	}
-	//	j++;
-	//} while (j < lastbite);
-	//fclose(fp);
-
-
-
-#pragma endregion
 
 }
 
