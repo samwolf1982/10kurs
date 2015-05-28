@@ -52,6 +52,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	// create file buff
 	    createfile("buff.txt");
 	code();
+	decode();
 	system("pause");
 
 	return 0;
@@ -267,8 +268,10 @@ void code(){
 
 }
 
-void decode(){
 
+
+void decode(){
+	createfile("result.txt");
 	char * path = "buff.txt";
 
 	long siz = filesize(path);
@@ -279,49 +282,170 @@ void decode(){
 	//char ch;
 	BITS arrBit8[7];
 	BITS7 arrBit7[8];
+#pragma region Claer
+	// clear  arrbit7,8;
+	for (size_t i1 = 0; i1 < 8; i1++)
+	{
+		arrBit7[i1].b0 = 0;
+		arrBit7[i1].b1 = 0;
+		arrBit7[i1].b2 = 0;
+		arrBit7[i1].b3 = 0;
+		arrBit7[i1].b4 = 0;
+		arrBit7[i1].b5 = 0;
+		arrBit7[i1].b6 = 0;
+	}
+	for (size_t i2 = 0; i2 < 7; i2++)
+	{
+		arrBit8[i2].b0 = 0;
+		arrBit8[i2].b1 = 0;
+		arrBit8[i2].b2 = 0;
+		arrBit8[i2].b3 = 0;
+		arrBit8[i2].b4 = 0;
+		arrBit8[i2].b5 = 0;
+		arrBit8[i2].b6 = 0;
+		arrBit8[i2].b7 = 0;
+	}
+#pragma endregion
 	cout << "Считывание из буфера\n";
 	FILE * fpBufer;
 	size_t j = 0;
 	fpBufer = fopen("buff.txt", "rb");
 
-	for (size_t j1 = 0; j1 <8; j1++)
+// read 8*n and convert to 7*n
+	while (fread(&arrBit7[j++], 1, 1, fpBufer) != 0)
 	{
-		fread(&arrBit7[j1], 1, 1, fpBufer);
+		if (j > 7){
+
+			for (size_t jw = 0; jw < 7; jw++)
+			{
+
+				arrBit8[jw].b0 = arrBit7[jw].b0;
+				arrBit8[jw].b1 = arrBit7[jw].b1;
+				arrBit8[jw].b2 = arrBit7[jw].b2;
+				arrBit8[jw].b3 = arrBit7[jw].b3;
+				arrBit8[jw].b4 = arrBit7[jw].b4;
+				arrBit8[jw].b5 = arrBit7[jw].b5;
+				arrBit8[jw].b6 = arrBit7[jw].b6;
+				//cout << arrBit8[j].b0 << arrBit8[j].b1 << arrBit8[j].b2 << arrBit8[j].b3 << arrBit8[j].b4 << arrBit8[j].b5 << arrBit7[j].b6 << "\n";
+			}
+
+
+			arrBit8[0].b7 = arrBit7[7].b0;
+			arrBit8[1].b7 = arrBit7[7].b1;
+			arrBit8[2].b7 = arrBit7[7].b2;
+			arrBit8[3].b7 = arrBit7[7].b3;
+			arrBit8[4].b7 = arrBit7[7].b4;
+			arrBit8[5].b7 = arrBit7[7].b5;
+			arrBit8[6].b7 = arrBit7[7].b6;
+			// read to new file like result
+			
+			cout << "-DECODE-----------------после конвертации  7 - 8 ------------------------\n";
+
+			for (size_t j = 0; j < 7; j++)
+			{
+				cout << arrBit8[j].b0 << arrBit8[j].b1 << arrBit8[j].b2 << arrBit8[j].b3 << arrBit8[j].b4 << arrBit8[j].b5 << arrBit8[j].b6 << arrBit8[j].b7 << "\n";
+			}
+			cout << "Запись в файл result" << "\n";
+			FILE * fp = fopen("result.txt", "ab");
+
+		//	if (fp == NULL){ ofstream outfile("result.txt"); outfile.close(); fp = fopen("result.txt", "ab"); }
+			//fseek(fpBufer, 0, SEEK_END);
+			for (size_t j3 = 0; j3 < 7; j3++)
+			{
+				fwrite(&arrBit8[j3], 1, 1, fp);
+			}
+			
+
+			fclose(fp);
+#pragma region Claer
+			// clear  arrbit7,8;
+			for (size_t i1 = 0; i1 < 8; i1++)
+			{
+				arrBit7[i1].b0 = 0;
+				arrBit7[i1].b1 = 0;
+				arrBit7[i1].b2 = 0;
+				arrBit7[i1].b3 = 0;
+				arrBit7[i1].b4 = 0;
+				arrBit7[i1].b5 = 0;
+				arrBit7[i1].b6 = 0;
+			}
+			for (size_t i2 = 0; i2 < 7; i2++)
+			{
+				arrBit8[i2].b0 = 0;
+				arrBit8[i2].b1 = 0;
+				arrBit8[i2].b2 = 0;
+				arrBit8[i2].b3 = 0;
+				arrBit8[i2].b4 = 0;
+				arrBit8[i2].b5 = 0;
+				arrBit8[i2].b6 = 0;
+				arrBit8[i2].b7 = 0;
+			}
+#pragma endregion
+
+			j = 0;
+		}
 	}
+
+
 	fclose(fpBufer);
-	cout << "------------------Обратная конверация ------------------------\n";
+#pragma region Last bites
+	if (j > 0){
+		// ok
+		for (size_t i = 0; i < j ; i++)
+		{
+			// конвертация
 
 
-	for (size_t jw = 0; jw < 7; jw++)
-	{
+			arrBit8[i].b0 = arrBit7[i].b0;
+			arrBit8[i].b1 = arrBit7[i].b1;
+			arrBit8[i].b2 = arrBit7[i].b2;
+			arrBit8[i].b3 = arrBit7[i].b3;
+			arrBit8[i].b4 = arrBit7[i].b4;
+			arrBit8[i].b5 = arrBit7[i].b5;
+			arrBit8[i].b6 = arrBit7[i].b6;
+			//	cout << arrBit7[j].b0 << arrBit7[j].b1 << arrBit7[j].b2 << arrBit7[j].b3 << arrBit7[j].b4 << arrBit7[j].b5 << arrBit7[j].b6  << "\n";
 
-		arrBit8[jw].b0 = arrBit7[jw].b0;
-		arrBit8[jw].b1 = arrBit7[jw].b1;
-		arrBit8[jw].b2 = arrBit7[jw].b2;
-		arrBit8[jw].b3 = arrBit7[jw].b3;
-		arrBit8[jw].b4 = arrBit7[jw].b4;
-		arrBit8[jw].b5 = arrBit7[jw].b5;
-		arrBit8[jw].b6 = arrBit7[jw].b6;
-		//cout << arrBit8[j].b0 << arrBit8[j].b1 << arrBit8[j].b2 << arrBit8[j].b3 << arrBit8[j].b4 << arrBit8[j].b5 << arrBit7[j].b6 << "\n";
+		}
+
+
+		arrBit8[0].b7 = arrBit7[j-1].b0;
+		arrBit8[1].b7 = arrBit7[j - 1].b1;
+		arrBit8[2].b7 = arrBit7[j - 1].b2;
+		arrBit8[3].b7 = arrBit7[j - 1].b3;
+		arrBit8[4].b7 = arrBit7[j - 1].b4;
+		arrBit8[5].b7 = arrBit7[j - 1].b5;
+		arrBit8[6].b7 = arrBit7[j - 1].b6;
+		//arrBit8[j - 1].b0 = arrBit8[0].b7;
+		//arrBit8[j - 1].b1 = arrBit8[1].b7;
+		//arrBit8[j - 1].b2 = arrBit8[2].b7;
+		//arrBit8[j - 1].b3 = arrBit8[3].b7;
+		//arrBit8[j - 1].b4 = arrBit8[4].b7;
+		//arrBit8[j - 1].b5 = arrBit8[5].b7;
+		//arrBit7[j - 1].b6 = arrBit8[6].b7;
+		FILE * fpB = fopen("result.txt", "ab");
+		//if (fpBufer == NULL){ ofstream outfile("buff.txt"); outfile.close(); fpBufer = fopen("buff.txt", "ab"); }
+		// write to res file
+		for (size_t i = 0; i < j ; i++)
+		{
+			for (size_t j3 = 0; j3 < j; j3++)
+			{
+				fwrite(&arrBit8[j3], 1, 1, fpB);
+			}
+			fclose(fpB);
+		}
+
 	}
-
-
-	arrBit8[0].b7 = arrBit7[7].b0;
-	arrBit8[1].b7 = arrBit7[7].b1;
-	arrBit8[2].b7 = arrBit7[7].b2;
-	arrBit8[3].b7 = arrBit7[7].b3;
-	arrBit8[4].b7 = arrBit7[7].b4;
-	arrBit8[5].b7 = arrBit7[7].b5;
-	arrBit8[6].b7 = arrBit7[7].b6;
+#pragma endregion
 
 
 
-	cout << "------------------после конвертации 7 - 8 ------------------------\n";
 
-	for (size_t j = 0; j < 7; j++)
-	{
-		cout << arrBit8[j].b0 << arrBit8[j].b1 << arrBit8[j].b2 << arrBit8[j].b3 << arrBit8[j].b4 << arrBit8[j].b5 << arrBit8[j].b6 << arrBit8[j].b7 << "\n";
-	}
+	//cout << "------------------после конвертации 7 - 8 ------------------------\n";
+
+	//for (size_t j = 0; j < 7; j++)
+	//{
+	//	cout << arrBit8[j].b0 << arrBit8[j].b1 << arrBit8[j].b2 << arrBit8[j].b3 << arrBit8[j].b4 << arrBit8[j].b5 << arrBit8[j].b6 << arrBit8[j].b7 << "\n";
+	//}
 
 
 
