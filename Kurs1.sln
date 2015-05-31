@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "k3", "k3\k3.vcxproj", "{7CE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kurs4WF", "Kurs4WF\Kurs4WF.csproj", "{2ED93260-0CF6-4D0C-A67D-AAA628DC3F79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kurs5WF", "kurs5WF\kurs5WF.csproj", "{FE9516CE-B12C-41F0-892A-900A43D4137F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,16 @@ Global
 		{2ED93260-0CF6-4D0C-A67D-AAA628DC3F79}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2ED93260-0CF6-4D0C-A67D-AAA628DC3F79}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2ED93260-0CF6-4D0C-A67D-AAA628DC3F79}.Release|Win32.ActiveCfg = Release|Any CPU
+		{FE9516CE-B12C-41F0-892A-900A43D4137F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE9516CE-B12C-41F0-892A-900A43D4137F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE9516CE-B12C-41F0-892A-900A43D4137F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FE9516CE-B12C-41F0-892A-900A43D4137F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FE9516CE-B12C-41F0-892A-900A43D4137F}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{FE9516CE-B12C-41F0-892A-900A43D4137F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE9516CE-B12C-41F0-892A-900A43D4137F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE9516CE-B12C-41F0-892A-900A43D4137F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FE9516CE-B12C-41F0-892A-900A43D4137F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FE9516CE-B12C-41F0-892A-900A43D4137F}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
