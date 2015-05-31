@@ -68,7 +68,7 @@ void code(char * pathtofile){
 	long siz = filesize(path);
 	long fullsize = siz / 7;
 	long lastbite = siz % 7;
-
+	char *c = "fddf";
 	//char ch;
 	BITS arrBit8[7];
 	BITS7 arrBit7[8];
@@ -81,14 +81,17 @@ void code(char * pathtofile){
 
 
 
+
 	/// fill byfer  7*8
 	
 		FILE * fp = fopen(path, "rb");
-		size_t j = 0;
-		
+	
 
+	
+		size_t j = 0;
 		FILE * fpBufer = fopen(bufer, "wb");// создание и очистка буфера
 		fclose(fpBufer);
+
 		// побайтовое чтение файла до конца
 			while (fread(&arrBit8[j++], 1, 1, fp) != 0)
 			{
