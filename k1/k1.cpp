@@ -17,8 +17,6 @@ int _tmain(int argc, _TCHAR* argv[])
 	setlocale(LC_ALL, "Rus");
 	int result = 0; // указатель на выбор
 
-	//unsigned bit1: 8;
-
 	do{
 		result = 0;
 		int tempValue = 0; // ввод из клавиатуры
@@ -41,7 +39,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			if (tempValue == 2){  // 2 to 10
 				string val;
 				cout << "¬ведити число в двоичном  формате: ";
-				//cin >> val;
+
 				binToNum();
 				cout << "\n\n";
 			}

@@ -206,7 +206,7 @@
             this.comandText.Name = "comandText";
             this.comandText.Size = new System.Drawing.Size(146, 275);
             this.comandText.TabIndex = 19;
-            this.comandText.Text = "mov AL 100\nmov BL 100\nmov AH 20\nint 3 \nadd AL BL\nsbb AH AL";
+            this.comandText.Text = "mov AL 100\nmov BL 100\npush AL\npop CH";
             // 
             // button3
             // 

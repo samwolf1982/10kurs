@@ -69,20 +69,14 @@ void code(char * pathtofile){
 	long fullsize = siz / 7;
 	long lastbite = siz % 7;
 	char *c = "fddf";
-	//char ch;
 	BITS arrBit8[7];
 	BITS7 arrBit7[8];
 
-//	cout << "s=" << siz / 8 << "   last:" << lastbite << "\n";
 
-	//int counter = 1;
 
 #pragma region Fuul loops
 
 
-
-
-	/// fill byfer  7*8
 	
 		FILE * fp = fopen(path, "rb");
 	
@@ -95,17 +89,12 @@ void code(char * pathtofile){
 		// побайтовое чтение файла до конца
 			while (fread(&arrBit8[j++], 1, 1, fp) != 0)
 			{
-
-
 				// если набрали 7 тогда идем в середину
 				if (j>6){
 					j = 0;
 #pragma region write to buff
 					cout << "------------------исходные даные оригинал ------------------------\n";
-					//  testr resd 7*8
-					/*for (size_t ia = 0; ia < fullsize; ia++)
-					{*/
-					// show
+
 						for (size_t ja = 0; ja < 7; ja++)
 						{
 							cout << arrBit8[ja].b0 << arrBit8[ja].b1 << arrBit8[ja].b2 << arrBit8[ja].b3 << arrBit8[ja].b4 << arrBit8[ja].b5 << arrBit8[ja].b6 << arrBit8[ja].b7 << "\n";
@@ -193,7 +182,6 @@ void code(char * pathtofile){
 				for (size_t i = 0; i < j-1; i++)
 				{
 					// конвертация
-					
 
 						arrBit7[i].b0 = arrBit8[i].b0;
 						arrBit7[i].b1 = arrBit8[i].b1;
@@ -394,9 +382,7 @@ void decode(){
 			arrBit8[i].b4 = arrBit7[i].b4;
 			arrBit8[i].b5 = arrBit7[i].b5;
 			arrBit8[i].b6 = arrBit7[i].b6;
-			//	cout << arrBit7[j].b0 << arrBit7[j].b1 << arrBit7[j].b2 << arrBit7[j].b3 << arrBit7[j].b4 << arrBit7[j].b5 << arrBit7[j].b6  << "\n";
-
-		}
+			}
 
 
 		arrBit8[0].b7 = arrBit7[j-1].b0;

@@ -50,22 +50,22 @@ namespace kurs5WF
         bool[]  _17 = new bool[8];
                 bool[]  _18 = new bool[8];
 
-
+       // List<int>stask
         // для чтения даных из текстовых полей
         char[] temp1;
         char[] temp2;
 
         // all comands
         List<string[]> allcomands = new List<string[]>();
-
+       
         // all comands IHR прериваний
         List<string[]> allcomandsIHR = new List<string[]>();
 
         String[] tim1C={"mov", "_17" ,"99"};
         String[] tim2C = { "mov", "_18", "99" };
         String[] timSC = { "mov", "_18", "99" };
-       
 
+        List<bool[]> stack = new List<bool[]>();
         int counter = 0;
         public Form1()
         {
@@ -82,7 +82,7 @@ namespace kurs5WF
             CX[1] = CL;
             DX[0] = DH;
             DX[1] = DL;
-
+           
         
         }
         /// <summary>
@@ -689,7 +689,7 @@ namespace kurs5WF
 
             //res += "\nflags:  ";
 
-            s += "CF- " + (CF == true ? "1 " : "0 ") + "  \nZF- " + (ZF == true ? "1 " : "0 ") + "  \nSF- " + (SF == true ? "1 " : "0 ") + "  \nOF- " + (OF == true ? "1 " : "0 ") + "\n------------------\n";
+            s += "CF- " + (CF == true ? "1 " : "0 ") + "  \nZF- " + (ZF == true ? "1 " : "0 ") + "  \nSF- " + (SF == true ? "1 " : "0 ") + "  \nOF- " + (OF == true ? "1 " : "0 ") + "  \nIF- " + (IF == true ? "1 " : "0 ")+ "  \nTF- " + (TF == true ? "1 " : "0 ")+ "  \nIP- " + (IP == true ? "1 " : "0 ")+"  \nDF- " + (DF == true ? "1 " : "0 ")+"\n------------------\n";
             richTextBox1.Text = s;
             regText.Text += res;
   
@@ -851,14 +851,61 @@ namespace kurs5WF
                                 if (str[0] == "int")      // преривание
                                 {
 
+                                    if (IF == true) return;
                                     parsestringINT(str);
-
-                                    //sbb(ref x1, ref y1);
 
                                     showrReg();
                                 }
+                                else
+                                    if (str[0] == "sti")      // преривание
+                                    {
+                                        IF = true;
+                        
+                                    }
+                                    else
+                                        if (str[0] == "cli")      // преривание
+                                        {
+                                            IF = false;
+
+                                        }
+                                        else
+                                            if (str[0] == "stt")      // преривание
+                                            {
+                                                TF = true;
+
+                                            }
+                                            else
+                                                if (str[0] == "clt")      // преривание
+                                                {
+                                                    TF = false;
+
+                                                }
+                                                else
+                                                    if (str[0] == "segment")      // преривание
+                                                    {
+                                                        TF = false;
+
+                                                    }
+                                                    else
+                                                        if (str[0] == "push")      // куда
+                                                        {
+                                                            parsestringStaskR(out xx, out yy, out x1, str);
+                                                            push(x1); 
+
+                                                        }
+                                                        else
+                                                            if (str[0] == "pop")      //откуда
+                                                            {
+                                                                parsestringStaskR(out xx, out yy, out x1, str);
+                                                                pop(ref x1);
+
+                                                            }
 
 
+
+
+
+            showrReg();
             // для лога
 
             String res = "";
@@ -870,16 +917,35 @@ namespace kurs5WF
             logBox.Text = (res += logBox.Text);
         }
 
+        void pop(ref bool[] x)
+        {
+            if (stack.Count == 0)
+            {
+
+            }
+            else
+            {
+                x = stack.Last().ToArray();
+              //  stack.RemoveAt(stack.Count - 1);
+            }
+
+        }
+        void push(bool[]x)
+        {
+            stack.Add(x.ToArray());
+
+        }
         private void button2_Click(object sender, EventArgs e)
         {
 
-         //   if (timer1.Enabled == false) 
-            timer1.Start();
-            timer2.Start();
+        
+          //  timer1.Start();
+        //    timer2.Start();
 
             // 1 команда 2 приемник 3 источник (все разделены пробелом)
             // направление обработки строк
             mover();
+            
             
           
         }
@@ -1161,19 +1227,6 @@ namespace kurs5WF
             mem1 = a.ToArray();
 
 
-
-            //if (str[2] == "AX") y2 = AX;
-            //if (str[2] == "BX") y2 = BX;
-            //if (str[2] == "CX") y2 = CX;
-            //if (str[2] == "DX") y2 = DX;
-            //if (str[2] == "AH") y = AH;
-            //if (str[2] == "AL") y = AL;
-            //if (str[2] == "BH") y = BH;
-            //if (str[2] == "BL") y = BL;
-            //if (str[2] == "CH") y = CH;
-            //if (str[2] == "CL") y = CL;
-            //if (str[2] == "DH") y = DH;
-            //if (str[2] == "DL") y = DL;
         }
 
         /// <summary>
@@ -1222,6 +1275,41 @@ namespace kurs5WF
 
     
         }
+
+        /// <summary>
+        /// парсер строки для стек - регистр
+        /// </summary>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="str"></param>
+        void parsestringStaskR(out bool[][] x2, out bool[][] y2, out bool[] x, string[] str)
+        {
+            x2 = null;
+            y2 = null;
+            x = null;
+     
+
+            if (str[1] == "AX") x2 = AX;
+            if (str[1] == "BX") x2 = BX;
+            if (str[1] == "CX") x2 = CX;
+            if (str[1] == "DX") x2 = DX;
+            if (str[1] == "AH") x = AH;
+            if (str[1] == "AL") x = AL;
+            if (str[1] == "BH") x = BH;
+            if (str[1] == "BL") x = BL;
+            if (str[1] == "CH") x = CH;
+            if (str[1] == "CL") x = CL;
+            if (str[1] == "DH") x = DH;
+            if (str[1] == "DL") x = DL;
+            if (str[2] == "AX") y2 = AX;
+            if (str[2] == "BX") y2 = BX;
+            if (str[2] == "CX") y2 = CX;
+            if (str[2] == "DX") y2 = DX;
+
+        }
+
         /// <summary>
         /// парсер строки для регистр - регистр
         /// </summary>
@@ -1278,7 +1366,6 @@ namespace kurs5WF
                 a.Add("AA:0x" + c.ToString());              
                 allcomands.Add(a.ToArray());
                 c++;
-
             }
 
 
@@ -1333,7 +1420,7 @@ namespace kurs5WF
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == Keys.Space)
+            if (keyData == Keys.RControlKey)
             {
 
                 int id = 2;
