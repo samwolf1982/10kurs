@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace kurs5WF
 {
-    enum ToDo{ADD,ADC,SUB,SUBB,MUL,DIV,SHR,ROR,RRC,SHL,ROL,RLC,AND,NOT,OR,XOR} ;
+
    
     
     public partial class Form1 : Form
@@ -70,7 +70,7 @@ namespace kurs5WF
         public Form1()
         {
             InitializeComponent();
-            comboBox1.DataSource = ToDo.GetValues(typeof(ToDo));
+       
             allcomandsIHR.Add(tim1C);
             allcomandsIHR.Add(tim2C);
             allcomandsIHR.Add(timSC);
@@ -149,218 +149,7 @@ namespace kurs5WF
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // очистка всех массивов обязательно
-            reg = null;
-            mem1 = null;
-            mem2 = null;
-
-         reg = new bool[8];
-         mem1 = new bool[8];
-         mem2 = new bool[8];
-            #region чтение входных даных
-           temp1 = textBox1.Text.ToArray();
-           temp2 = textBox4.Text.ToArray();
-           for (int i = 0; i < reg.Length; i++)
-           {
-               mem1[i] = (temp1[i].ToString()=="0")?false:true;
-               mem2[i] = (temp2[i].ToString() == "0") ? false : true;
-           } 
-            // flags   
-          string[] strFlag = textBox2.Text.Split('|');
-          CF = strFlag[0] == "0" ? false : true; ZF = strFlag[1] == "0" ? false : true; SF = strFlag[2] == "0" ? false : true; OF = strFlag[3] == "0" ? false : true;
-
-        
- 
-            #endregion
-
       
-
-            switch ((ToDo)comboBox1.SelectedItem)
-            {
-                case ToDo.ADD:
-                    {
-                        #region прямок -> обрантый -> дополнительный код
-                         //    поиск отрицательного числа для перевода в дополнительный код
-                        if (mem1[0] == true)
-                        {
-                            toReturnCode(ref mem1);
-                          
-                        }
-                        if (mem2[0] == true)
-                        {
-                            toReturnCode(ref mem2);
-                        }
-
-
-
-                           #endregion
-
-                        DebugBite(mem1, "Mem1 ");
-                        DebugBite(mem2, "Mem2 ");
-                        
-                       /// add2()
-                      //  add();
-                        //clear();
-                    }
-                    break;
-                case ToDo.ADC:
-                    {
-                        #region прямок -> обрантый -> дополнительный код
-                        //    поиск отрицательного числа для перевода в дополнительный код
-                        if (mem1[0] == true)
-                        {
-                            toReturnCode(ref mem1);
-
-                        }
-                        if (mem2[0] == true)
-                        {
-                            toReturnCode(ref mem1);
-                        }
-
-
-
-                        #endregion
-
-                        DebugBite(mem1, "Mem1 ");
-                        DebugBite(mem2, "Mem2 ");
-                        adc();
-                    }
-                    break;
-                case ToDo.SUB:
-                    {
-                        //меняем знак второго числа на противополжный    5-2 == 5+(-2)
-                        mem2[0] = mem2[0] == true ? false : true;
-                        #region прямок -> обрантый -> дополнительный код
-                        //    поиск отрицательного числа для перевода в дополнительный код
-                      
-                        if (mem1[0] == true)
-                        {
-                            toReturnCode(ref mem1);
-
-                        }
-                        if (mem2[0] == true)
-                        {
-                            toReturnCode(ref mem2);
-                        }
-
-
-
-                        #endregion
-
-                        DebugBite(mem1, "Mem1 ");
-                        DebugBite(mem2, "Mem2 ");
-
-                        add();
-                        clear();
-
-                    }
-
-                    break;
-                case ToDo.SUBB:
-                    {
-                        //меняем знак второго числа на противополжный    5-2 == 5+(-2)
-                        mem2[0] = mem2[0] == true ? false : true;
-                        #region прямок -> обрантый -> дополнительный код
-                        //    поиск отрицательного числа для перевода в дополнительный код
-                        if (mem1[0] == true)
-                        {
-                            toReturnCode(ref mem1);
-
-                        }
-                        if (mem2[0] == true)
-                        {
-                            toReturnCode(ref mem1);
-                        }
-                        #endregion
-                        
-//                        DebugBite(mem1, "Mem1 ");
-                      //  DebugBite(mem2, "Mem2 ");
-                        adc();
-
-                    }
-                    break;
-                case ToDo.MUL:
-                    break;
-                case ToDo.DIV:
-                    break;
-                case ToDo.SHR:
-                    {
-
-       
-
-                      //  DebugBite(mem1, "SHR ");
-                        //DebugBite(mem2, "SHR ");
-                        shr();
-
-                    }
-                    break;
-                case ToDo.ROR:
-                    {
-                        ror();
-                     richTextBox1.Text = "";
-                     textBox3.Text = showSingleresult();
-                    }
-                    break;
-                case ToDo.RRC:
-                    {
-                        rrc();
-                        richTextBox1.Text = "";
-                        textBox3.Text = showSingleresult();
-                    }
-                    break;
-                case ToDo.SHL:
-                    break;
-                case ToDo.ROL:
-                    {
-                        rol();
-                        richTextBox1.Text = "";
-                        textBox3.Text = showSingleresult();
-                    }
-                    break;
-                case ToDo.RLC:
-                    {
-                        {
-                            rlc();
-                            richTextBox1.Text = "";
-                            textBox3.Text = showSingleresult();
-                        }
-
-                    }
-                    break;
-                case ToDo.AND:
-                    {
-                        and();
-                        richTextBox1.Text = "";
-                        textBox3.Text = showSingleresult();
-                    }
-                    break;
-                case ToDo.NOT:
-                    {
-                        not();
-                           richTextBox1.Text = "";
-                        textBox3.Text = showSingleresult();
-                    }
-                    break;
-                case ToDo.OR:
-                        {
-                        or();
-                           richTextBox1.Text = "";
-                        textBox3.Text = showSingleresult();
-                    }
-                    break;
-                case ToDo.XOR:
-                    {
-                        xor();
-                        richTextBox1.Text = "";
-                        textBox3.Text = showSingleresult();
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
 
         /// <summary>
         /// or
@@ -519,83 +308,9 @@ namespace kurs5WF
             showSingleresult();
             clear();
         }
-        void adc()
-        {
-            for (int i = mem1.Length - 1; i >0; i--)
-            {
-                if ((mem1[i] == true && mem2[i] == true))
-                {
-                    reg[i] = false;
-                    CF = true;
-                }
-                else if ((mem1[i] == false && mem2[i] == false))
-                {
-
-                    if (CF == true) { reg[i] = true; CF = false; }
-                    else reg[i] = false;
-                }
-                else if (mem1[i] == false && mem2[i] == true || mem1[i] == true && mem2[i] == false)
-                {
-                    if (CF == true) { reg[i] = false; }
-                    else reg[i] = true;
-                }
-                showresult("");
-            }
-            if ((mem1[0] == false && mem2[0] == false)){ reg[0] = false; }       
-            else reg[0] = true;
-            //else if ((mem1[0] == true && mem2[0] == true)) { }
-            mem1 = reg;   
-            textBox3.Text = showresult();
-
-            DebugBite(mem1, "ADC ");
-        }
+   
   
-        void add()
-        {
-            for (int i = mem1.Length-1; i >=0; i--)
-            {
-                if ((mem1[i]==true&&  mem2[i]==true)  )
-                {
-                    reg[i] = false;
-                    if (CF == true) { reg[i] = true; CF = true; }
-                    else if (CF == false) { CF = true; }
-
-                }
-                    else if((mem1[i]==false &&  mem2[i]==false)){
-
-                        if (CF == true) { reg[i] = true; CF = false; }
-                        else reg[i] = false;
-                    }
-                else if (mem1[i] == false && mem2[i] == true || mem1[i] == true && mem2[i] == false)
-                {
-                    if (CF == true) { reg[i] = false; }
-                    else reg[i] = true;
-                }
-                showresult("");
-                DebugBite(mem1,"A ");
-                                DebugBite(mem2,"A ");
-                                DebugBite(reg, "A ");
-            }
-
-
-            //if ((mem1[0] == false && mem2[0] == false)) { SF = false; }
-            //else if ((mem1[0] == true && mem2[0] == true)) { SF = true; }
-            //else reg[0] = true;
-            // знак
-            if (reg[0] == true) SF = true;
-            //     переделать на проверку по знакам для OF
-            if (CF == true) OF = true;
-            CF = false;
-            ZF=true;//is zero??
-            for (int i = 0; i < reg.Length; i++)
-            {
-                if (reg[i] == true) { ZF = false; break; }
-            }
-            mem1=reg;
-          textBox3.Text=  showresult();
-
-        //  DebugBite(mem1,"ADD ");
-        }
+    
         string showSingleresult(string s = "\nResult")
         {
             string cobmbo = "";
@@ -605,11 +320,7 @@ namespace kurs5WF
             {
                 res += (mem1[i] == true) ? "1 " : "0 ";
             }
-            //res += "\nmem2:  ";
-            //for (int i = 0; i < mem1.Length; i++)
-            //{
-            //    res += (mem2[i] == true) ? "1 " : "0 ";
-            //}
+
             res += "\nreg:      ";
             for (int i = 0; i < mem1.Length; i++)
             {
@@ -817,6 +528,7 @@ namespace kurs5WF
                     add2(ref x1, ref y1);
                     //mov(ref x1);
                     showrReg();
+
                 }
                 else
                     if (str[0] == "neg")      // cмена знака числа
@@ -836,6 +548,7 @@ namespace kurs5WF
                             sub2(ref x1, ref y1);
 
                             showrReg();
+
                         }
                         else
                             if (str[0] == "sbb")      // cмена знака числа
@@ -845,10 +558,11 @@ namespace kurs5WF
                                 sbb(ref x1, ref y1);
 
                                 showrReg();
+                                CF = false;
                             }
 
                             else
-                                if (str[0] == "int")      // преривание
+                                if (str[0] == "int")      // прерывание
                                 {
 
                                     if (IF == true) return;
@@ -857,7 +571,7 @@ namespace kurs5WF
                                     showrReg();
                                 }
                                 else
-                                    if (str[0] == "sti")      // преривание
+                                    if (str[0] == "sti")      
                                     {
                                         IF = true;
                         
@@ -939,8 +653,6 @@ namespace kurs5WF
         {
 
         
-          //  timer1.Start();
-        //    timer2.Start();
 
             // 1 команда 2 приемник 3 источник (все разделены пробелом)
             // направление обработки строк
@@ -1355,7 +1067,6 @@ namespace kurs5WF
 
         private void button3_Click(object sender, EventArgs e)
         {
-
             allcomands.Clear();
             List<String> sre = comandText.Text.Split('\n').ToList();
            
@@ -1420,7 +1131,7 @@ namespace kurs5WF
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == Keys.RControlKey)
+            if (keyData == Keys.Space)
             {
 
                 int id = 2;
@@ -1436,6 +1147,11 @@ namespace kurs5WF
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

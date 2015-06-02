@@ -26,13 +26,13 @@ namespace Kurs4WF
             // take float number
                float val=   float.Parse( textBox1.Text);
             // take size type of number
-            int size = sizeof(int) *8;
+            int size = 0;
             // массив битов никакие встроеные методы не используються!
             // иначально как float 4*8
            
             int v =(int) val;
           //  v = 8+curind++;
-            v = 5;
+         //   v = 5;
             int tempval = Math.Abs(v);
             String res = "";
             size = 8;
@@ -74,7 +74,7 @@ namespace Kurs4WF
                 // доделать ручную инверсию
                 arr.Not();
                 /// add 1
-                bool flag = true;
+                bool flag = true;// << 1
                 for (int i = size - 1; i >= 0; i--)
                 {
                     if (flag == true)
@@ -102,37 +102,13 @@ namespace Kurs4WF
             #endregion
 
 
-            #region Дробная часть
-
-            for (int i = 0; i < size; i++)
-            {
-                
-            }
-
-            #endregion
-
-            // test show
-          
-
-
-
-            //  float r=  val - (int)val;
-                
-            //   int  r=  ( (val- (int) val)) << 4;   //  x * 16 
 
       }
-        string arrtotextExpo(BitArray arr)
-        {
-            string res = "";
-            int indexer = 0;
-            foreach (bool item in arr)
-            {
-                if (indexer ==1 || indexer==9 ) res += " ";
-                res += (item == true) ? "1" : "0";
-                indexer++;
-            }
-            return res;
-        }
+        /// <summary>
+        /// arr to text
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
         string arrtotext(BitArray arr)
         {
             string res = "";
@@ -144,7 +120,11 @@ namespace Kurs4WF
             }
             return res;
         }
-        // 2 buton
+/// <summary>
+///                        Start here
+/// </summary>
+/// <param name="sender"></param>
+/// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             // take float number
@@ -152,13 +132,12 @@ namespace Kurs4WF
             string[] nuberCol =s.Split(',');
             float val = float.Parse(textBox1.Text);
 
-            int val2 = -1;
-            if (comboBox1.SelectedIndex == 3)val2=      nuberCol[1].Length;
-      
-            // take size type of number
-            int size = sizeof(float) * 8;
+           // int val2 = -1;
+         //   if (comboBox1.SelectedIndex == 3)val2=      nuberCol[1].Length;
 
-            int d = int.Parse(comboBox2.Items[comboBox2.SelectedIndex].ToString());
+
+            var x = comboBox2.Items[comboBox2.SelectedIndex].ToString();
+            int d = int.Parse(x);
 
                if(comboBox1.SelectedIndex==0) richTextBox1.Text += "\n" + arrtotext(additionalCode(d,val));
 
@@ -169,98 +148,98 @@ namespace Kurs4WF
 
         }
         // mantis
-        private void button3_Click(object sender, EventArgs e)
-        {
-            String s = textBox1.Text;
-            string[] nuberCol = s.Split(',');
-            float val = float.Parse(textBox1.Text);
-            float val2 = float.Parse(textBox1.Text);
-            int v = (int)val;  // целая
-            float vd = val - v; //дробная
+      
+        //{
+        //    String s = textBox1.Text;
+        //    string[] nuberCol = s.Split(',');
+        //    float val = float.Parse(textBox1.Text);
+        //    float val2 = float.Parse(textBox1.Text);
+        //    int v = (int)val;  // целая
+        //    float vd = val - v; //дробная
 
           
-            if (comboBox1.SelectedIndex == 3) val2 = nuberCol[1].Length;
+        //    if (comboBox1.SelectedIndex == 3) val2 = nuberCol[1].Length;
 
-            // take size type of number
-            int size = sizeof(float) * 8;
+        //    // take size type of number
+        //    int size = sizeof(float) * 8;
 
-            bool sign =val>=0?true:false;  //ok
+        //    bool sign =val>=0?true:false;  //ok
 
-            int a = int.Parse(nuberCol[0]);
-            uint b = uint.Parse(nuberCol[1]);
+        //    int a = int.Parse(nuberCol[0]);
+        //    uint b = uint.Parse(nuberCol[1]);
 
-            int countNum = nuberCol[1].Length;
-            int counter=0;
-            uint res = 0;
+        //    int countNum = nuberCol[1].Length;
+        //    int counter=0;
+        //    uint res = 0;
 
 
-            uint c = 30;
-            for (int i = 0; i < countNum; i++)// пишем от 30 а потом <<
-            {
-                vd = vd * 2;
-                if (vd >= 1) { res |= 1 << 0; vd = vd - 1; }
-                else res |= 0 << 0;
-                res = res << 1;
-                showBits(res, "BeginB ");
+        //    uint c = 30;
+        //    for (int i = 0; i < countNum; i++)// пишем от 30 а потом <<
+        //    {
+        //        vd = vd * 2;
+        //        if (vd >= 1) { res |= 1 << 0; vd = vd - 1; }
+        //        else res |= 0 << 0;
+        //        res = res << 1;
+        //        showBits(res, "BeginB ");
                 
-            }
-            showBits(res, "FinA ");
-            for (int i = 0; i < 30-countNum+1; i++)
-            {               
-            res = res << 1;
-            }
-            showBits(res, "FinB ");
-            //перевод дроби в res
+        //    }
+        //    showBits(res, "FinA ");
+        //    for (int i = 0; i < 30-countNum+1; i++)
+        //    {               
+        //    res = res << 1;
+        //    }
+        //    showBits(res, "FinB ");
+        //    //перевод дроби в res
 
 
 
 
-            bool tempBool=false;
-            int tempIn;
-          bool  flag = false;
-          counter = 0;                                           // количество сдвигов - експонента
-            res = res >> 1; // двигаем вправо на 1 позицию (место для другой)
-            do
-            {
-              tempBool =  a%2==0 ? false:true; // если число чет значить 0 нечет 1 
+        //    bool tempBool=false;
+        //    int tempIn;
+        //  bool  flag = false;
+        //  counter = 0;                                           // количество сдвигов - експонента
+        //    res = res >> 1; // двигаем вправо на 1 позицию (место для другой)
+        //    do
+        //    {
+        //      tempBool =  a%2==0 ? false:true; // если число чет значить 0 нечет 1 
               
-                tempIn = a >> 1;// >> левая часть
-                if (tempIn > 0)
-                {
-                    a = tempIn;
-                    res = res >> 1; // двигаем вправо на 1 позицию (место для другой) // правая часть
-                    showBits(res, "Move ");
-                    if (tempBool == true) {  res |= 1 << 30; }
-                    else { res |= 0 << 30; }
-                    showBits(res, "Move ");
-                    counter++;
-                }
-                else { flag = true; }
+        //        tempIn = a >> 1;// >> левая часть
+        //        if (tempIn > 0)
+        //        {
+        //            a = tempIn;
+        //            res = res >> 1; // двигаем вправо на 1 позицию (место для другой) // правая часть
+        //            showBits(res, "Move ");
+        //            if (tempBool == true) {  res |= 1 << 30; }
+        //            else { res |= 0 << 30; }
+        //            showBits(res, "Move ");
+        //            counter++;
+        //        }
+        //        else { flag = true; }
                 
              
-            } while (flag!=true);
-            res = res << 1;        // cмещение назад
+        //    } while (flag!=true);
+        //    res = res << 1;        // cмещение назад
 
-            showBits(res, "FinishM ");// готовая мантисса число b
+        //    showBits(res, "FinishM ");// готовая мантисса число b
 
-          //  a =counter+127;
-            sbyte expo = 127;
+        //  //  a =counter+127;
+        //    sbyte expo = 127;
 
-            for (int i = 0; i < counter; i++)
-            {
-                expo++;
-            }
+        //    for (int i = 0; i < counter; i++)
+        //    {
+        //        expo++;
+        //    }
 
-            showsBytes(expo, "Fin ");
-            showBits(res, "manF ");
+        //    showsBytes(expo, "Fin ");
+        //    showBits(res, "manF ");
 
-           // showsBytes(expo);
-            var exp = expo >> 1;
+        //   // showsBytes(expo);
+        //    var exp = expo >> 1;
    
 
-            // ss |= 1 << 2;
+        //    // ss |= 1 << 2;
          
-        }
+        //}  private void button3_Click(object sender, EventArgs e)
    String floatCode3(int capacity, string num)
         {
             string resStr = "";
@@ -272,17 +251,8 @@ namespace Kurs4WF
        bool sign = val >= 0 ? true : false;  //ok
             vd = Math.Abs(vd);
 
-
-          //  if (comboBox1.SelectedIndex == 3) val2 = nuberCol[1].Length;
-
-            // take size type of number
-            int size = sizeof(float) * 8;
-
-           
-
-            //int a = int.Parse(nuberCol[0]); 
-            //uint b = uint.Parse(nuberCol[1]);
-            int a =Math.Abs (v);
+ 
+            int a =Math.Abs (v);///              массидв мантиса
             uint b = uint.Parse(nuberCol[1]);
 
             int countNum = nuberCol[1].Length;// количество чисел в дроби для умножения
@@ -293,7 +263,7 @@ namespace Kurs4WF
           
             // пишем от 30 а потом смещаем влевоо до упора
              // для примера   ,1875*2 =0   0,375*2 = 0  0,750*2 =1 0,5*2=1 
-         // результат  0000000000000n11; потом смещение до упора и 1100000000n
+         // результат  0000000000000n11; потом смещение до упора и 1100010001  |=1 <<5
             for (int i = 0; i < countNum; i++)
             {
                 vd = vd * 2;
@@ -324,7 +294,7 @@ namespace Kurs4WF
             {
                 tempBool = a % 2 == 0 ? false : true; // если число чет значить 0 нечет 1 
 
-                tempIn = a >> 1;// >> левая часть
+                tempIn = a >> 1;// >> левая часть   5/ 2 /1 
                 
                 if (tempIn > 0) // при смещение >> всегда будет число меньше как только дошли до 0 значить сместилися максимально 
                 {
@@ -357,18 +327,8 @@ namespace Kurs4WF
             showsBytes(expo, "Fin ");
             showBits(res, "manF ");
 
-            // showsBytes(expo);
             var exp = expo >> 1; 
-       //    текстовое представление
-          //  resStr = sign == true ? "0 " : "1 ";
-          //  resStr += showsBytes(expo);
-          //  resStr += showBits(res);
 
-          //  resStr += "     знак= " + ((sign == true) ? "1 " : "0 ");
-          //resStr += "     порядок= " + expo.ToString();
-          //  resStr += "     мантисса= " + convertbiteToFloat(res);
-
-          //  resStr = sign == true ? "0 " : "1 ";
        resStr += "     знак= " + ((sign == true) ? "1 " : "0 ");
        resStr += "     порядок= " ;
             resStr += showsBytes(expo)+"  ("+ expo.ToString()+")";

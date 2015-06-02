@@ -1,0 +1,30 @@
+mov AH 10
+neg AH
+mov BH 10
+neg BH
+add AH BH
+
+
+mov AH 15
+mov BH 10
+sub AH BH
+
+
+mov AL 100
+mov BL 100
+mov AH 20
+add AL BL
+sbb AH AL
+
+mov AL 100
+mov BL 100
+sti
+mov AH 20
+int 3 
+cli
+add AL BL
+int 3
+sbb AH AL
+
+
+
