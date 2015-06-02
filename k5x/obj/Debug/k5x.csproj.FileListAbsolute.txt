@@ -1,0 +1,8 @@
+D:\test\git10kurs\10kurs\k5x\bin\Debug\k5x.exe.config
+D:\test\git10kurs\10kurs\k5x\bin\Debug\k5x.exe
+D:\test\git10kurs\10kurs\k5x\bin\Debug\k5x.pdb
+D:\test\git10kurs\10kurs\k5x\obj\Debug\k5x.Form1.resources
+D:\test\git10kurs\10kurs\k5x\obj\Debug\k5x.Properties.Resources.resources
+D:\test\git10kurs\10kurs\k5x\obj\Debug\k5x.csproj.GenerateResource.Cache
+D:\test\git10kurs\10kurs\k5x\obj\Debug\k5x.exe
+D:\test\git10kurs\10kurs\k5x\obj\Debug\k5x.pdb

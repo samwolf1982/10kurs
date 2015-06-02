@@ -8,5 +8,11 @@ C:\Users\Sam\Documents\Visual Studio 2013\Projects\Kurs1a\Kurs4WF\bin\Debug\Kurs
 C:\Users\Sam\Documents\Visual Studio 2013\Projects\Kurs1a\Kurs4WF\obj\Debug\Kurs4WF.exe
 C:\Users\Sam\Documents\Visual Studio 2013\Projects\Kurs1a\Kurs4WF\obj\Debug\Kurs4WF.pdb
 D:\test\git10kurs\10kurs\Kurs4WF\bin\Debug\Kurs4WF.exe.config
+D:\test\git10kurs\10kurs\Kurs4WF\bin\Debug\Kurs4WF.exe
+D:\test\git10kurs\10kurs\Kurs4WF\bin\Debug\Kurs4WF.pdb
+D:\test\git10kurs\10kurs\Kurs4WF\obj\Debug\Kurs4WF.csprojResolveAssemblyReference.cache
+D:\test\git10kurs\10kurs\Kurs4WF\obj\Debug\Kurs4WF.Form1.resources
+D:\test\git10kurs\10kurs\Kurs4WF\obj\Debug\Kurs4WF.Properties.Resources.resources
+D:\test\git10kurs\10kurs\Kurs4WF\obj\Debug\Kurs4WF.csproj.GenerateResource.Cache
 D:\test\git10kurs\10kurs\Kurs4WF\obj\Debug\Kurs4WF.exe
 D:\test\git10kurs\10kurs\Kurs4WF\obj\Debug\Kurs4WF.pdb

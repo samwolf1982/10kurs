@@ -1,5 +1,18 @@
-﻿Сборка начата 31.05.2015 19:24:24.
+﻿Сборка начата 01.06.2015 13:44:19.
+     1>Проект "D:\test\git10kurs\10kurs\k1\k1.vcxproj" в узле 2 (целевые объекты Build).
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\k1.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\k1.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt k1.cpp
+         k1.cpp
+     1>d:\test\git10kurs\10kurs\k1\k1.cpp(70): warning C4554: <<: проверьте порядок применения операторов на наличие ошибки; для четкого задания порядка используйте скобки
+     1>d:\test\git10kurs\10kurs\k1\k1.cpp(74): warning C4018: <=: несоответствие типов со знаком и без знака
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\test\git10kurs\10kurs\Debug\k1.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\test\git10kurs\10kurs\Debug\k1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\test\git10kurs\10kurs\Debug\k1.lib" /MACHINE:X86 Debug\k1.obj
+         Debug\stdafx.obj
+         k1.vcxproj -> D:\test\git10kurs\10kurs\Debug\k1.exe
+     1>Сборка проекта "D:\test\git10kurs\10kurs\k1\k1.vcxproj" завершена (целевые объекты Build).
 
-Ошибка сборки.
+Сборка успешно завершена.
 
-Затраченное время: 00:00:15.47
+Затраченное время: 00:00:17.71

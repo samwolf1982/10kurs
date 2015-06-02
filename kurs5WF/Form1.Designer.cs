@@ -43,6 +43,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.regText = new System.Windows.Forms.RichTextBox();
+            this.comandText = new System.Windows.Forms.RichTextBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -55,9 +59,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(550, 35);
+            this.richTextBox1.Location = new System.Drawing.Point(839, 30);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(365, 452);
+            this.richTextBox1.Size = new System.Drawing.Size(64, 165);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -148,7 +152,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(118, 273);
+            this.button1.Location = new System.Drawing.Point(293, 280);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 14;
@@ -174,11 +178,51 @@
             this.label9.TabIndex = 16;
             this.label9.Text = "ввод в прямом коде";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(228, 394);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 17;
+            this.button2.Text = "avto";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // regText
+            // 
+            this.regText.Location = new System.Drawing.Point(603, 30);
+            this.regText.Name = "regText";
+            this.regText.Size = new System.Drawing.Size(197, 354);
+            this.regText.TabIndex = 18;
+            this.regText.Text = "";
+            // 
+            // comandText
+            // 
+            this.comandText.Location = new System.Drawing.Point(12, 78);
+            this.comandText.Name = "comandText";
+            this.comandText.Size = new System.Drawing.Size(146, 275);
+            this.comandText.TabIndex = 19;
+            this.comandText.Text = "mov AL 100\nmov BL 100\nmov AH 20\nadd AL BL\nsbb AH AL";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(13, 394);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 20;
+            this.button3.Text = "read";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 499);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.comandText);
+            this.Controls.Add(this.regText);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.button1);
@@ -218,6 +262,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RichTextBox regText;
+        private System.Windows.Forms.RichTextBox comandText;
+        private System.Windows.Forms.Button button3;
     }
 }
 

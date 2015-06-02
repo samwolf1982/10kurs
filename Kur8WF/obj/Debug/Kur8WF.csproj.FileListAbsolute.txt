@@ -1,0 +1,9 @@
+D:\test\git10kurs\10kurs\Kur8WF\bin\Debug\Kur8WF.exe.config
+D:\test\git10kurs\10kurs\Kur8WF\bin\Debug\Kur8WF.exe
+D:\test\git10kurs\10kurs\Kur8WF\bin\Debug\Kur8WF.pdb
+D:\test\git10kurs\10kurs\Kur8WF\obj\Debug\Kur8WF.csprojResolveAssemblyReference.cache
+D:\test\git10kurs\10kurs\Kur8WF\obj\Debug\Kur8WF.Form1.resources
+D:\test\git10kurs\10kurs\Kur8WF\obj\Debug\Kur8WF.Properties.Resources.resources
+D:\test\git10kurs\10kurs\Kur8WF\obj\Debug\Kur8WF.csproj.GenerateResource.Cache
+D:\test\git10kurs\10kurs\Kur8WF\obj\Debug\Kur8WF.exe
+D:\test\git10kurs\10kurs\Kur8WF\obj\Debug\Kur8WF.pdb

@@ -27,7 +27,7 @@ double fi(double a2, double c1, double b1, double a1, double b2, double c2, doub
 
 int main() {
 	int n = 0;
-	double x = -2.0, y, b, eps = 0.0001;
+	double x = -2.0, y, b, eps = 0.000001;
 	double a1, a2, b1, b2, c1, c2;
 	c1 = 0.0005; c2 = 0.0005;
 	cout << "a1: "; cin >> a1;
