@@ -360,14 +360,25 @@ namespace Kurs4WF
             // showsBytes(expo);
             var exp = expo >> 1; 
        //    текстовое представление
-            resStr = sign == true ? "0 " : "1 ";
-            resStr += showsBytes(expo);
-            resStr += showBits(res);
+          //  resStr = sign == true ? "0 " : "1 ";
+          //  resStr += showsBytes(expo);
+          //  resStr += showBits(res);
 
-            resStr += "     знак= " + ((sign == true) ? "+ " : "- ");
-            resStr += "     порядок= " + expo.ToString();
-            resStr += "     мантисса= " + convertbiteToFloat(res);
-    
+          //  resStr += "     знак= " + ((sign == true) ? "1 " : "0 ");
+          //resStr += "     порядок= " + expo.ToString();
+          //  resStr += "     мантисса= " + convertbiteToFloat(res);
+
+          //  resStr = sign == true ? "0 " : "1 ";
+       resStr += "     знак= " + ((sign == true) ? "1 " : "0 ");
+       resStr += "     порядок= " ;
+            resStr += showsBytes(expo)+"  ("+ expo.ToString()+")";
+       resStr += "     мантисса= " ;
+            resStr += showBits(res)+ " ("+ convertbiteToFloat(res)+")";
+
+           
+           
+           
+      
             return resStr;
         }
 

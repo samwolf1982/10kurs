@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -47,6 +48,9 @@
             this.regText = new System.Windows.Forms.RichTextBox();
             this.comandText = new System.Windows.Forms.RichTextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.logBox = new System.Windows.Forms.RichTextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // comboBox1
@@ -61,7 +65,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(839, 30);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(64, 165);
+            this.richTextBox1.Size = new System.Drawing.Size(64, 354);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -75,7 +79,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(242, 220);
+            this.textBox2.Location = new System.Drawing.Point(453, 94);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 20);
             this.textBox2.TabIndex = 3;
@@ -135,7 +139,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(248, 182);
+            this.label5.Location = new System.Drawing.Point(450, 40);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 13);
             this.label5.TabIndex = 11;
@@ -152,7 +156,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(293, 280);
+            this.button1.Location = new System.Drawing.Point(456, 163);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 14;
@@ -163,7 +167,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(248, 201);
+            this.label8.Location = new System.Drawing.Point(167, 82);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(69, 13);
             this.label8.TabIndex = 15;
@@ -180,7 +184,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(228, 394);
+            this.button2.Location = new System.Drawing.Point(118, 394);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 17;
@@ -202,7 +206,7 @@
             this.comandText.Name = "comandText";
             this.comandText.Size = new System.Drawing.Size(146, 275);
             this.comandText.TabIndex = 19;
-            this.comandText.Text = "mov AL 100\nmov BL 100\nmov AH 20\nadd AL BL\nsbb AH AL";
+            this.comandText.Text = "mov AL 100\nmov BL 100\nmov AH 20\nint 3 \nadd AL BL\nsbb AH AL";
             // 
             // button3
             // 
@@ -214,11 +218,30 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // logBox
+            // 
+            this.logBox.Location = new System.Drawing.Point(242, 288);
+            this.logBox.Name = "logBox";
+            this.logBox.Size = new System.Drawing.Size(338, 96);
+            this.logBox.TabIndex = 21;
+            this.logBox.Text = "";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 3000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timer2
+            // 
+            this.timer2.Interval = 10000;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 499);
+            this.Controls.Add(this.logBox);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.comandText);
             this.Controls.Add(this.regText);
@@ -240,6 +263,8 @@
             this.Controls.Add(this.comboBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -266,6 +291,9 @@
         private System.Windows.Forms.RichTextBox regText;
         private System.Windows.Forms.RichTextBox comandText;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.RichTextBox logBox;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

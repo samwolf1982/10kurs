@@ -19,6 +19,8 @@ namespace kurs5WF
         bool[] reg; 
         bool[] mem1;    // ячейки памяти 8
         bool[] mem2;    // ячейки памяти 8
+
+        int countertimer = 3;
   
         //регистры общего назначения
         bool[][] AX = new bool[2][];// имитация 2*8 бит 
@@ -43,6 +45,11 @@ namespace kurs5WF
         bool SF = false;
         bool OF = false;
       
+        // cистемные флаги if запрет раз преривания TF - отладка кода DF- направление обработки строк () IF(17 ячейка для преривания)
+        bool IF, TF, DF,IP;
+        bool[]  _17 = new bool[8];
+                bool[]  _18 = new bool[8];
+
 
         // для чтения даных из текстовых полей
         char[] temp1;
@@ -50,12 +57,23 @@ namespace kurs5WF
 
         // all comands
         List<string[]> allcomands = new List<string[]>();
+
+        // all comands IHR прериваний
+        List<string[]> allcomandsIHR = new List<string[]>();
+
+        String[] tim1C={"mov", "_17" ,"99"};
+        String[] tim2C = { "mov", "_18", "99" };
+        String[] timSC = { "mov", "_18", "99" };
+       
+
         int counter = 0;
         public Form1()
         {
             InitializeComponent();
             comboBox1.DataSource = ToDo.GetValues(typeof(ToDo));
-
+            allcomandsIHR.Add(tim1C);
+            allcomandsIHR.Add(tim2C);
+            allcomandsIHR.Add(timSC);
             AX[0] = AH;
             AX[1] = AL;
             BX[0] = BH;
@@ -755,26 +773,39 @@ namespace kurs5WF
             CF = false; OF = false; SF = false; ZF = false;
         }
 
-        
-        private void button2_Click(object sender, EventArgs e)
-        {
-            // 1 команда 2 приемник 3 источник (все разделены пробелом)
-           string[] str =     allcomands[counter];
-           counter++;
 
-          
+        public void mover()
+        {
+          //  if (counter == 0) return;
+            string[] str = allcomands[counter];
+            if (DF == true) counter--;
+            else counter++;
+
+
 
             bool[][] xx;
             bool[][] yy;
-            bool[] x1 ;
-            bool[] y1  ;
+            bool[] x1;
+            bool[] y1;
 
+
+            // просмот флагов на текущий момент (для прерываний)
+            //mov #17,ip
+            //inc #17
+            //mov #18,flags
+            //cli
+            //jmp int1
+            //Команда iret выполнит (неявно)
+            //mov flags,#18
+            //mov ip,#17
+            //sti
+            //ret
 
             if (str[0] == "mov")
             {
-                parsestringRN(out xx,out yy,out x1,out y1,str);
+                parsestringRN(out xx, out yy, out x1, out y1, str);
 
-              //  add2();
+                //  add2();
                 mov(ref x1);
                 showrReg();
             }
@@ -783,7 +814,7 @@ namespace kurs5WF
                 {
                     parsestringRR(out xx, out yy, out x1, out y1, str);
 
-                      add2(ref x1,ref y1);
+                    add2(ref x1, ref y1);
                     //mov(ref x1);
                     showrReg();
                 }
@@ -794,7 +825,7 @@ namespace kurs5WF
 
                         neg(ref x1);
                         //mov(ref x1);
-            
+
                         showrReg();
                     }
                     else
@@ -802,8 +833,8 @@ namespace kurs5WF
                         {
                             parsestringRR(out xx, out yy, out x1, out y1, str);
 
-                            sub2(ref x1,ref y1);
-                      
+                            sub2(ref x1, ref y1);
+
                             showrReg();
                         }
                         else
@@ -815,6 +846,42 @@ namespace kurs5WF
 
                                 showrReg();
                             }
+
+                            else
+                                if (str[0] == "int")      // преривание
+                                {
+
+                                    parsestringINT(str);
+
+                                    //sbb(ref x1, ref y1);
+
+                                    showrReg();
+                                }
+
+
+            // для лога
+
+            String res = "";
+            foreach (var item in str)
+            {
+                res += item + "  ";
+            }
+            res += "\n";
+            logBox.Text = (res += logBox.Text);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+         //   if (timer1.Enabled == false) 
+            timer1.Start();
+            timer2.Start();
+
+            // 1 команда 2 приемник 3 источник (все разделены пробелом)
+            // направление обработки строк
+            mover();
+            
+          
         }
 
         /// <summary>
@@ -1059,6 +1126,8 @@ namespace kurs5WF
             if (str[1] == "CL") x = CL;
             if (str[1] == "DH") x = DH;
             if (str[1] == "DL") x = DL;
+            if (str[1] == "_17") x = _17;
+            if (str[1] == "_18") x = _18;
 
 
             // поиск десятичного числа
@@ -1105,6 +1174,22 @@ namespace kurs5WF
             //if (str[2] == "CL") y = CL;
             //if (str[2] == "DH") y = DH;
             //if (str[2] == "DL") y = DL;
+        }
+
+        /// <summary>
+        /// преривание от int програмное
+        /// </summary>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="str"></param>
+        void parsestringINT( string[] str)
+        {
+           if (str[1] == "3")
+            {
+                MessageBox.Show("Прерывание 3 от INT");
+            }
         }
 
         /// <summary>
@@ -1164,7 +1249,6 @@ namespace kurs5WF
                 if (str[1] == "CL") x = CL;
                 if (str[1] == "DH") x = DH;
                 if (str[1] == "DL") x = DL;
-
                     if (str[2] == "AX") y2 = AX;
                     if (str[2] == "BX") y2 = BX;
                     if (str[2] == "CX") y2 = CX;
@@ -1179,14 +1263,22 @@ namespace kurs5WF
                     if (str[2] == "DL") y = DL;
         }
 
+
+
         private void button3_Click(object sender, EventArgs e)
         {
 
             allcomands.Clear();
-            string[] sre = comandText.Text.Split('\n');
+            List<String> sre = comandText.Text.Split('\n').ToList();
+           
+            int c = 1;
             foreach (var item in sre)
             {
-                allcomands.Add(item.Split(' '));
+                var a=item.Split(' ').ToList();
+                a.Add("AA:0x" + c.ToString());              
+                allcomands.Add(a.ToArray());
+                c++;
+
             }
 
 
@@ -1208,6 +1300,56 @@ namespace kurs5WF
 
 
        
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+           // timer1.Stop();
+            int id=0;
+            if (countertimer-- <= 0) timer1.Stop();
+            allcomands.Insert(counter, allcomandsIHR[id]);
+            MessageBox.Show("Timer 1 ");
+            
+            mover();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+           // timer2.Stop();
+            int id = 1;
+            if (countertimer-- <= 0) timer2.Stop();
+            allcomands.Insert(counter, allcomandsIHR[id]);
+            MessageBox.Show("Timer 2 ");
+            
+            mover();
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            MessageBox.Show("Press");
+        }
+
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Space)
+            {
+
+                int id = 2;
+                if (countertimer-- <= 0) timer1.Stop();
+                allcomands.Insert(counter, allcomandsIHR[id]);
+                //MessageBox.Show("Timer 1 ");
+
+                mover();
+                MessageBox.Show("You pressed Up arrow key");
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
         }
         }
