@@ -1,21 +1,23 @@
+
+                        // инверсия                           
 mov AH 10
 neg AH
 mov BH 10
 neg BH
 add AH BH
 
-
+                    -+ без флага                
 mov AH 15
 mov BH 10
 sub AH BH
 
-
+//                           +- c флагом
 mov AL 100
 mov BL 100
 mov AH 20
 add AL BL
 sbb AH AL
-
+            //          прерывание
 mov AL 100
 mov BL 100
 sti
@@ -26,5 +28,44 @@ add AL BL
 int 3
 sbb AH AL
 
+                   cтек добавление и извлечение нескольких елементов
+mov AH 15
+mov AL 10
+add AH AL
+push AH
+mov AH 0
+mov AL 0
+pop BL
+                       // преривание на непраильную коаманду
+mov AH 15
+mov AL 10
+add AH AL
+push edferfef
+mov AH 0
+mov AL 0
+pop BL
+                      ///          переход на метку
 
+mov AH 15
+mov AL 10
+label cfg
+add AH AL
+mov AL 14
+js cfg
+mov AH 0
+mov AL 0
+pop BL
+
+
+           //       переплнение стека больше 3 елементов
+mov AH 15
+mov AL 10
+add AH AL
+push AH
+push AH
+push AH
+push AH
+mov AH 0
+mov AL 0
+pop BL
 

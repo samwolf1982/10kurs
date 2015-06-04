@@ -48,7 +48,7 @@ namespace kurs5WF
         // cистемные флаги if запрет раз преривания TF - отладка кода DF- направление обработки строк () IF(17 ячейка для преривания)
         bool IF, TF, DF,IP;
         bool[]  _17 = new bool[8];
-                bool[]  _18 = new bool[8];
+        bool[]  _18 = new bool[8];
 
        // List<int>stask
         // для чтения даных из текстовых полей
@@ -651,9 +651,6 @@ namespace kurs5WF
         }
         private void button2_Click(object sender, EventArgs e)
         {
-
-        
-
             // 1 команда 2 приемник 3 источник (все разделены пробелом)
             // направление обработки строк
             mover();
