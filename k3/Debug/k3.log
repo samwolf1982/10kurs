@@ -1,8 +1,6 @@
-﻿Сборка начата 02.06.2015 15:56:28.
-     1>Проект "D:\test\git10kurs\10kurs\k3\k3.vcxproj" в узле 4 (целевые объекты Build).
+﻿Сборка начата 04.06.2015 9:42:50.
+     1>Проект "D:\test\git10kurs\10kurs\k3\k3.vcxproj" в узле 2 (целевые объекты Build).
      1>ClCompile:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\k3.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /FR"Debug\\" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
-         stdafx.cpp
          D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\k3.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /FR"Debug\\" /Gd /TP /analyze- /errorReport:prompt k3.cpp
          k3.cpp
        Link:
@@ -15,4 +13,4 @@
 
 Сборка успешно завершена.
 
-Затраченное время: 00:00:17.56
+Затраченное время: 00:00:11.56

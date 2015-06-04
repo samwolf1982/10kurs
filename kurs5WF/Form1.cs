@@ -1128,7 +1128,7 @@ namespace kurs5WF
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == Keys.Space)
+            if (keyData == Keys.NumLock)
             {
 
                 int id = 2;
